@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:fingerprint/screens/alarm_screen.dart';
 import 'package:fingerprint/screens/sign_history_screen.dart';
-import 'package:fingerprint/storage_manager.dart';
-import 'package:fingerprint/theme_provider.dart';
+import 'package:fingerprint/controllers/storage_manager.dart';
+import 'package:fingerprint/controllers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';

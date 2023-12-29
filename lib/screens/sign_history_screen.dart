@@ -1,5 +1,5 @@
-import 'package:fingerprint/dbhelper.dart';
-import 'package:fingerprint/theme_provider.dart';
+import 'package:fingerprint/controllers/dbhelper.dart';
+import 'package:fingerprint/controllers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

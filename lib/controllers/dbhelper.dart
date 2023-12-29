@@ -1,4 +1,4 @@
-import 'package:fingerprint/SignProfile.dart';
+import 'package:fingerprint/models/SignProfile.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {

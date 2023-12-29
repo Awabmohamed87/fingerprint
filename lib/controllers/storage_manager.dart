@@ -1,4 +1,4 @@
-import 'package:fingerprint/dbhelper.dart';
+import 'package:fingerprint/controllers/dbhelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageManager {

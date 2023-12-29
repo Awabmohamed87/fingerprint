@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:fingerprint/dbhelper.dart';
+import 'package:fingerprint/controllers/dbhelper.dart';
 import 'package:fingerprint/screens/home_screen.dart';
-import 'package:fingerprint/theme_provider.dart';
+import 'package:fingerprint/controllers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
