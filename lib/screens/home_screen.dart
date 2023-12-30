@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _timeRemaining = '';
   DateTime? _signTime;
   DateTime _endDate = DateTime.now();
-
+  var alarmPlugin = FlutterAlarmBackgroundTrigger();
   @override
   void initState() {
     setIsSigned();
@@ -117,9 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                     await sign();
                     setState(() {});
-                    var alarmPlugin = FlutterAlarmBackgroundTrigger();
                     alarmPlugin.addAlarm(
                         // Required
+                        //DateTime.now().add(Duration(seconds: 10)),
                         _endDate,
                         //Optional
                         uid: "fingerprint_end_date_alarm",
@@ -130,9 +130,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         alarmPlugin.onForegroundAlarmEventHandler((alarm) {
                           Get.to(() => AlarmScreen())!.then((value) async {
                             _isSignedToday = await sm.init();
+                            if (_isSignedToday == false) {
+                              List<AlarmItem> alarm = await alarmPlugin
+                                  .getAlarmByUid("fingerprint_end_date_alarm");
+                              await alarmPlugin.deleteAlarm(alarm[0].id!);
+                              _timeRemaining = '';
+                            }
                             setState(() {});
                           });
                         });
+                        Fluttertoast.showToast(
+                            msg:
+                                "Alarm Set at ${DateFormat.jm().format(_endDate)}",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                       }
                     });
                   }
@@ -185,10 +199,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       actions: [
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             sm.leave();
+                            List<AlarmItem> alarm = await alarmPlugin
+                                .getAlarmByUid("fingerprint_end_date_alarm");
+                            await alarmPlugin.deleteAlarm(alarm[0].id!);
                             if (_timer != null) _timer!.cancel();
                             setState(() {
+                              _timeRemaining = '';
                               _isSignedToday = false;
                             });
                             Navigator.of(ctx).pop();
